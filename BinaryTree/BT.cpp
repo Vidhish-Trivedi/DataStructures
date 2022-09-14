@@ -6,7 +6,7 @@ class Node
     public:
         long long int val;
         Node *left, *right;
-    
+
         Node ()
         {
             this->val = 0;
@@ -21,50 +21,83 @@ class Node
         }
 };
 
-
-void printInorder(Node *root)
+Node* newNode(long long int v)
 {
-    if(root == NULL)
-    {
-        return;
-    }
-    printInorder(root->left);
-    cout << root->val << " ";
-    printInorder(root->right);
+    Node *n = new Node(v);
+    return(n);
 }
 
-void printPreorder(Node *root)
+Node* newNode()
 {
-    if(root == NULL)
-    {
-        return;
-    }
-    cout << root->val << " ";
-    printPreorder(root->left);
-    printPreorder(root->right);
+    Node *n = new Node();
+    return(n);
 }
 
-void printPostorder(Node *root)
+class BT
 {
-    if(root == NULL)
-    {
-        return;
-    }
-    printPostorder(root->left);
-    printPostorder(root->right);
-    cout << root->val << " ";
-}
+    public:
+        Node *root;
+
+        void printInorder(Node* r)
+        {
+            if(r == NULL)
+            {
+                return;
+            }
+            printInorder(r->left);
+            cout << r->val << " ";
+            printInorder(r->right);
+        }
+
+        void printPreorder(Node *r)
+        {
+            if(r == NULL)
+            {
+                return;
+            }
+            cout << r->val << " ";
+            printPreorder(r->left);
+            printPreorder(r->right);
+        }
+
+        void printPostorder(Node *r)
+        {
+            if(r == NULL)
+            {
+                return;
+            }
+            printPostorder(r->left);
+            printPostorder(r->right);
+            cout << r->val << " ";
+        }
+
+        BT()
+        {
+            root = newNode();
+        }
+
+        BT(long long int v)
+        {
+            root = newNode(v);
+        }
+};
 
 int main()
 {
-    Node *root = new Node(10);
-    root->left = new Node(11);
-    root->left->right = new Node(20);
-    root->left->left = new Node(211);
-    root->right = new Node(5);
-    root->right->left = new Node(-321);
+    BT *tree = new BT(10);
+    
+    tree->root->left = newNode(11);
+    tree->root->left->right = newNode(20);
+    tree->root->left->left = newNode(211);
+    tree->root->right = newNode(5);
+    tree->root->right->left = newNode(-321);
 
-    // cout << endl;
+    tree->printInorder(tree->root);
+    cout << endl;
+    tree->printPostorder(tree->root);
+    cout << endl;
+    tree->printPreorder(tree->root);
+    cout << endl;
     return(0);
 }
 
