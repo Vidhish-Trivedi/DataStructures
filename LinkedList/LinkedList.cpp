@@ -22,10 +22,12 @@ class Node{
 
         void setData(long long int d){
             this->data = d;
+            return;
         }
 
         void setNext(Node* n){
             this->next = n;
+            return;
         }
 };
 
